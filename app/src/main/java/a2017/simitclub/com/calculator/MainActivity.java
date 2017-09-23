@@ -12,11 +12,12 @@ package a2017.simitclub.com.calculator;
 
 public class MainActivity extends Activity {
     String msg = "Android : ";
-
+    TextView calculationView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        calculationView = (TextView) findViewById(R.id.opertationView);
     }
 
     /** Called when the activity is about to become visible. */
@@ -54,9 +55,19 @@ public class MainActivity extends Activity {
         Log.d(msg, "The onDestroy() event");
     }
 
+    /** Called to concat the calculations and calculate*/
+    public void BuildCalculation(View v)
+    {
+        String currentText = ((TextView) v).getText().toString();
+        Toast.makeText(getApplicationContext(),
+                currentText, Toast.LENGTH_SHORT).show();
+        calculationView.append(currentText);
+    }
+
     /** This method will clear the view and calculations*/
     public void Clear(View v)
     {
+        calculationView.setText("");
         Toast.makeText(getApplicationContext(),
                 "Cleared Calculations", Toast.LENGTH_SHORT).show();
     }
