@@ -48,7 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="/" />
+            android:text="/"
+            android:onClick="AppendOperator"/>
     </LinearLayout>
 
 
@@ -83,7 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="X" />
+            android:text="X"
+            android:onClick="AppendOperator"/>
     </LinearLayout>
 
     <LinearLayout
@@ -117,7 +119,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-" />
+            android:text="-"
+            android:onClick="AppendOperator"/>
     </LinearLayout>
 
     <LinearLayout
@@ -186,16 +189,5 @@
             android:text="="
             android:onClick="Compute"/>
     </LinearLayout>
-
-    <!--<GridView-->
-        <!--android:id="@+id/opertators"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="251dp"-->
-        <!--android:numColumns="auto_fit"-->
-        <!--android:gravity="center"-->
-        <!--android:columnWidth="50dp"-->
-        <!--android:stretchMode="columnWidth">-->
-
-    <!--</GridView>-->
 
 </LinearLayout>

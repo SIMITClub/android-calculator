@@ -1,26 +1,35 @@
 package a2017.simitclub.com.calculator;
 
-        import android.os.Bundle;
-        import android.app.Activity;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.GridView;
-        import android.widget.AdapterView;
-        import android.widget.ArrayAdapter;
-        import android.widget.Switch;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.os.Bundle;
+import android.app.Activity;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
     String msg = "Android : ";
     TextView calculationView;
     TextView resultView;
+    String previousOperator;
+    double result;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         calculationView = (TextView) findViewById(R.id.opertationView);
         resultView =  (TextView) findViewById(R.id.result);
+        init();
+    }
+
+    /** Initialisation method */
+    public void init()
+    {
+        result = 0.0d;
+        previousOperator = "";
+        calculationView.setText("");
+        resultView.setText("0");
     }
 
     /** Called when the activity is about to become visible. */
@@ -63,12 +72,36 @@ public class MainActivity extends Activity {
     {
         String currentText = ((TextView) v).getText().toString();
         calculationView.append(currentText);
+        previousOperator = currentText;
     }
 
     public void OperateCalculation(View v)
     {
         String currentText = ((TextView) v).getText().toString();
         calculationView.append(currentText);
+        switch (previousOperator)
+        {
+            case "":
+                result = Integer.parseInt(currentText);
+                break;
+            case "+":
+                result += Integer.parseInt(currentText);
+                break;
+            case "-":
+                result -= Integer.parseInt(currentText);
+                break;
+            case "%":
+                result %= Integer.parseInt(currentText);
+                break;
+            case "/":
+                result /= Integer.parseInt(currentText);
+                break;
+            case "X":
+                result *= Integer.parseInt(currentText);
+                break;
+            default:
+                System.out.print("Something went wrong");
+        }
         Compute(v);
     }
 
@@ -76,21 +109,15 @@ public class MainActivity extends Activity {
      * 3 and 2 operands
      * + operator */
     public void Compute(View v) {
-        double result = 0.0;
-        String[] numbers = calculationView.getText().toString().split("\\+");
-
-        for (int i = 0; i < numbers.length; i++) {
-            result += Integer.parseInt(numbers[i]);
-        }
-
         resultView.setText(String.format("%s", result));
     }
 
     /** This method will clear the view and calculations*/
     public void Clear(View v)
     {
-        calculationView.setText("");
         Toast.makeText(getApplicationContext(),
                 "Cleared Calculations", Toast.LENGTH_SHORT).show();
+        init();
+
     }
 }
